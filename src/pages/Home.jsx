@@ -1,12 +1,12 @@
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
-import { getAllPosts } from 'services/PostsAPI';
+import PostAPI from 'services/PostsAPI';
 import useFetch from 'hooks/useFetch';
 import PostElement from 'components/elements/Post';
 
 function Home() {
-  const { data, error, loading } = useFetch(getAllPosts);
+  const { data, error, loading } = useFetch(PostAPI.All);
 
   return (
     <Container fluid>
