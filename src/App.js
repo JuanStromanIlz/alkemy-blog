@@ -7,32 +7,37 @@ import Theme from 'components/utilities/Theme';
 import Home from 'pages/Home';
 import Login from 'pages/Login';
 import NewPost from 'pages/NewPost';
-import EditPost from 'pages/EditPost';
+import DetailPost from 'pages/DetailPost';
+import Error from 'pages/Error';
+import { AlertProvider } from 'context/AlertContext';
 
 function App() {
   return (
     <ThemeProvider theme={Theme}>
       <GlobalStyles />
-      <Router>
-        <Routes>
-          <Route path='/login' element={<Login />} />
-          <Route path='/' element={
-            <PrivateRoute>
-              <Home />
-            </PrivateRoute>
-          } />
-          <Route path='/new' element={
-            <PrivateRoute>
-              <NewPost />
-            </PrivateRoute>
-          } />
-          <Route path='/edit/:id' element={
-            <PrivateRoute>
-              <EditPost />
-            </PrivateRoute>
-          } />
-        </Routes>
-      </Router>
+      <AlertProvider>
+        <Router>
+          <Routes>
+            <Route path='*' element={<Error />} />
+            <Route path='/login' element={<Login />} />
+            <Route path='/' element={
+              <PrivateRoute>
+                <Home />
+              </PrivateRoute>
+            } />
+            <Route path='/post/new' element={
+              <PrivateRoute>
+                <NewPost />
+              </PrivateRoute>
+            } />
+            <Route path='/post/:id' element={
+              <PrivateRoute>
+                <DetailPost />
+              </PrivateRoute>
+            } />
+          </Routes>
+        </Router>
+      </AlertProvider>
     </ThemeProvider>
   );
 }

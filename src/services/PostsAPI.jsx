@@ -1,12 +1,12 @@
 import axios from 'axios';
 
-const Instance = axios.create({
+const instance = axios.create({
   baseURL: 'https://jsonplaceholder.typicode.com/posts'
 });
 
 async function postCall(url = '/', body = undefined, method = 'get') {
   try {
-    let res = await Instance({
+    let res = await instance({
       method: method,
       url: url,
       data: body
@@ -44,5 +44,6 @@ PostAPI.All = getAllPosts;
 PostAPI.GetPost = getPost;
 PostAPI.New = newPost;
 PostAPI.Edit = editPost;
+PostAPI.Delete = deletePost;
 
 export default PostAPI;

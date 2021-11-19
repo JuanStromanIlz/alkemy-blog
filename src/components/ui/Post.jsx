@@ -1,6 +1,5 @@
 import Card from 'react-bootstrap/Card';
 import styled from 'styled-components';
-import useDetectClickOut from 'hooks/useDetectClickOut';
 
 const Post = styled(Card)`
   margin-bottom: 16px;
@@ -16,7 +15,7 @@ const User = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: ${p => p.theme.states.info};
+  background: ${p => p.theme.textSecondary};
   > * {
     line-height: 40px;
     font-weight: 700;
@@ -43,8 +42,9 @@ const Option = styled.div`
   padding: 16px;
   display: flex;
   flex-direction: row;
-  background: ${p => p.theme.textPrimary};
-  color: ${p => p.theme.background};
+  ${'' /* background: ${p => p.theme.textPrimary};
+  border-bottom: 1px solid rgba(0,0,0,.125);
+  color: ${p => p.theme.background}; */}
   transition: all .2s;
   .material-icons {
     display: flex;
@@ -73,8 +73,12 @@ const ActionsContainer = styled.div`
   .actions--button {
     display: flex;
     margin: auto;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 2px solid transparent;
   }
   .list {
+    border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     overflow: hidden;
     position: absolute;
@@ -83,20 +87,26 @@ const ActionsContainer = styled.div`
     display: flex;
     flex-direction: column;
   }
+  @media (hover: hover) {
+    .actions--button:hover {
+      border-color: ${p => p.theme.textSecondary};
+    }
+  }
 `;
 
-const Actions = ({children}) => {
-  const { show, nodeRef, triggerRef } = useDetectClickOut(false);
+const Actions = ({show, node, trigger, children, ...props}) => {
 
   return (
-    <ActionsContainer>
-      <div className='actions--button' ref={triggerRef}>
+    <ActionsContainer
+      {...props}
+    >
+      <div className='actions--button' ref={trigger}>
         <span className='material-icons'>more_horiz</span>
       </div>
       {show &&
-        <div ref={nodeRef} className='list'>
+        <Post bg='white' ref={node} className='list'>
           {children}
-        </div>
+        </Post>
       }
     </ActionsContainer>
   );

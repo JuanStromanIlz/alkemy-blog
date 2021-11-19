@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-function useFetchData(method) {
+function useFetchData(method, value = undefined) {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -9,7 +9,7 @@ function useFetchData(method) {
     (async function() {
       try{
         setLoading(true);
-        const res = await method();
+        const res = await method(value);
         setData(res);
       }catch(err){
         setError(err);
@@ -17,12 +17,14 @@ function useFetchData(method) {
         setLoading(false);
       }
     })();
-  }, [method])
+  }, [method, value])
 
   return {
     data,
     error,
-    loading
+    loading,
+    setData,
+    setLoading
   }
 }
 

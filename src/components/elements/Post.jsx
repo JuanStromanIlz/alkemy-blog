@@ -1,15 +1,27 @@
 import Post, {Actions} from 'components/ui/Post';
+import useDetectClickOut from 'hooks/useDetectClickOut';
 
-function PostElement({info}) {
+function PostElement({info, onEdit, onDelete}) {
+  const { show, nodeRef, triggerRef, setShow } = useDetectClickOut(false);
+
+  function closeAction(action, id) {
+    action(id);
+    setShow(false);
+  }
+
   return (
-    <Post>
+    <Post bg='light'>
       <Post.Header>
         <Post.User>
           <span>{info.userId}</span>
         </Post.User>
-        <Actions>
-          <Actions.Option icon='edit'>Edit Post</Actions.Option>              
-          <Actions.Option icon='delete_outline'>Delete</Actions.Option>
+        <Actions
+          show={show}
+          node={nodeRef}
+          trigger={triggerRef}
+        >
+          <Actions.Option onClick={() => closeAction(onEdit, info.id)} icon='edit'>Edit Post</Actions.Option>              
+          <Actions.Option onClick={() => closeAction(onDelete, info.id)} icon='delete_outline'>Delete</Actions.Option>
           </Actions>
       </Post.Header>
       <Post.Body>

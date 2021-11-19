@@ -27,7 +27,7 @@ function FormWValidation({initialValues, validationSchema, onSubmit, children}) 
                 <Form.ErrorMessage error={errors[field.props.name]} touched={touched[field.props.name]} />
               </Form.Group>
             )}
-            <Button variant='danger' type='submit'>Submit</Button>
+            <Button type='submit'>Submit</Button>
           </Form>
         )}
       </Formik>

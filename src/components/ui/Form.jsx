@@ -7,6 +7,9 @@ const StyledError = styled.div`
 `;
 
 const Form = styled(FormBS)`
+  gap: 16px;
+  display: flex;
+  flex-direction: column;
   & .form-label {
     text-transform: capitalize;
   }
@@ -22,12 +25,9 @@ const ErrorWrapper = ({error, touched}) => (
 );
 
 const Group = styled(Form.Group)`
-  & .form-control {
-    ${'' /* border-color: ${p => p.isValid ?
-      p.theme.states.success :
-      p.inError &&
-      p.theme.states.danger
-    }; */}
+  ${'' /* margin-top: 16px; */}
+  textarea {
+    resize: none;
   }
 `;
 
