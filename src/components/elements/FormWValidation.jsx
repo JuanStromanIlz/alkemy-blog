@@ -1,4 +1,6 @@
-import { Formik, Form, ErrorMessage } from 'formik';
+import { Formik, Form as FormFormik } from 'formik';
+import Button from 'components/ui/Button';
+import Form from 'components/ui/Form';
 
 function FormWValidation({initialValues, validationSchema, onSubmit, children}) {
   return (
@@ -12,14 +14,20 @@ function FormWValidation({initialValues, validationSchema, onSubmit, children}) 
         }}
       >
         {({ errors, touched }) => (
-          <Form>
+          <Form as={FormFormik}>
             {children.map(field => 
-              <div key={field.props.name}>
+              <Form.Group 
+                // inError={Boolean(errors[field.props.name])}
+                // isValid={!errors[field.props.name] && touched[field.props.name]} 
+                key={field.props.name} 
+                controlId={field.props.name}
+              >
+                <Form.Label>{field.props.name}</Form.Label>
                 {field}
-                <ErrorMessage name={field.props.name} />
-              </div>
+                <Form.ErrorMessage error={errors[field.props.name]} touched={touched[field.props.name]} />
+              </Form.Group>
             )}
-            <button type="submit">Submit</button>
+            <Button variant='danger' type='submit'>Submit</Button>
           </Form>
         )}
       </Formik>

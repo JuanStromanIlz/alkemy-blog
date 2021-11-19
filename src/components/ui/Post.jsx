@@ -3,10 +3,7 @@ import styled from 'styled-components';
 import useDetectClickOut from 'hooks/useDetectClickOut';
 
 const Post = styled(Card)`
-  background: ${p => p.theme.background};
-  border: none;
-  border-radius: 0px;
-  border-bottom: 1px solid ${p => p.theme.textSecondary};
+  margin-bottom: 16px;
 `;
 
 const Body = styled(Card.Body)` 
@@ -21,7 +18,6 @@ const User = styled.div`
   border-radius: 50%;
   background: ${p => p.theme.states.info};
   > * {
-    color: ${p => p.theme.background};
     line-height: 40px;
     font-weight: 700;
   }
@@ -79,6 +75,8 @@ const ActionsContainer = styled.div`
     margin: auto;
   }
   .list {
+    border-radius: .25rem;
+    overflow: hidden;
     position: absolute;
     top: 48px;
     right: 0;

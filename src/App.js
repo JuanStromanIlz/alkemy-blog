@@ -6,6 +6,8 @@ import PrivateRoute from 'components/elements/PrivateRoute';
 import Theme from 'components/utilities/Theme';
 import Home from 'pages/Home';
 import Login from 'pages/Login';
+import NewPost from 'pages/NewPost';
+import EditPost from 'pages/EditPost';
 
 function App() {
   return (
@@ -13,12 +15,22 @@ function App() {
       <GlobalStyles />
       <Router>
         <Routes>
+          <Route path='/login' element={<Login />} />
           <Route path='/' element={
             <PrivateRoute>
               <Home />
             </PrivateRoute>
           } />
-          <Route path='/login' element={<Login />} />
+          <Route path='/new' element={
+            <PrivateRoute>
+              <NewPost />
+            </PrivateRoute>
+          } />
+          <Route path='/edit/:id' element={
+            <PrivateRoute>
+              <EditPost />
+            </PrivateRoute>
+          } />
         </Routes>
       </Router>
     </ThemeProvider>

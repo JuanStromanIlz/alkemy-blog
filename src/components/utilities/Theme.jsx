@@ -5,7 +5,10 @@ const Theme = {
   states: {
     info: '#FBCBCB',
     success: '#34A847',
-    error: '#F27851'
+    warning: '#F27851',
+    danger: '#dc3545',
+    light: '#f8f9fa',
+    dark: '#191816'
   }
 };
 

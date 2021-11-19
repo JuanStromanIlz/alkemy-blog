@@ -2,14 +2,17 @@ import axios from 'axios';
 
 async function AuthAPI(body) {
   try {
-    let res = axios.post('http://challenge-react.alkemy.org/', {
+    let res = await axios.post('http://challenge-react.alkemy.org/', {
       email: body.email,
       password: body.password
     });
-    return res;
+    if (res.status !== 200) {
+      throw new Error('Invalid credentials.');
+    }
+    return res.data.token;
   }
   catch(err) {
-    throw new Error(err);
+    throw new Error('Invalid credentials.');
   }
 }
 
