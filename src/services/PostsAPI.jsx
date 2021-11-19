@@ -22,6 +22,10 @@ export function getAllPosts() {
   return postCall();
 }
 
+export function getPage(start, limit) {
+  return postCall(`?_start=${start}&_limit=${limit}`);
+}
+
 export function getPost(id) {
   return postCall(`/${id}`);
 }
@@ -41,6 +45,7 @@ export function deletePost(id) {
 const PostAPI = {};
 
 PostAPI.All = getAllPosts;
+PostAPI.Page = getPage;
 PostAPI.GetPost = getPost;
 PostAPI.New = newPost;
 PostAPI.Edit = editPost;

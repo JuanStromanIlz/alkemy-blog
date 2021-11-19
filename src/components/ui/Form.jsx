@@ -12,9 +12,17 @@ const Form = styled(FormBS)`
   flex-direction: column;
   & .form-label {
     text-transform: capitalize;
+    font-weight: 500;
   }
   & button[type='submit'] {
     margin-top: 16px;
+  }
+  & .form-control:disabled {
+    background: transparent;
+    border: none;
+  }
+  & textarea {
+    resize: none;
   }
 `;
 
@@ -24,14 +32,6 @@ const ErrorWrapper = ({error, touched}) => (
   : null
 );
 
-const Group = styled(Form.Group)`
-  ${'' /* margin-top: 16px; */}
-  textarea {
-    resize: none;
-  }
-`;
-
-Form.Group = Group;
 Form.ErrorMessage = ErrorWrapper;
 
 export default Form;

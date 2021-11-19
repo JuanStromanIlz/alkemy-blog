@@ -6,8 +6,9 @@ import { Col, Row } from 'react-bootstrap';
 import Loading from 'components/elements/Loading';
 import FormWValidation from 'components/elements/FormWValidation';
 import { Field } from 'formik';
-import Form from 'components/ui/Form';
+import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const NewPostSchema = Yup.object().shape({
   title: Yup.string()
@@ -24,6 +25,7 @@ const NewPostValues = {
 function NewPost() {
   const { openAlert } = useContext(AlertContext);
   const [loading, setLoading] = useState(false);
+  let navigate = useNavigate();
 
   async function createNewPost(values) {
     try {
@@ -36,6 +38,7 @@ function NewPost() {
         title: 'Success',
         message: 'New post successfully created.'
       });
+      navigate('/');
     }
     catch(err) {
       openAlert({
@@ -58,8 +61,20 @@ function NewPost() {
               validationSchema={NewPostSchema}
               onSubmit={createNewPost}
             >
-              <Form.Control as={Field} name='title' placeholder='Title of the post' />
-              <Field as='textarea' className='form-control' name='body' rows='5' placeholder='Write something for the body' />
+              <Field 
+                as={TextareaAutosize}
+                className='form-control'
+                name='title'
+                placeholder='Title of the post.'
+                maxRows={8} 
+              />
+              <Field 
+                as={TextareaAutosize}
+                className='form-control'
+                name='body'
+                placeholder='Write something for the body.'
+                maxRows={8}  
+              />
             </FormWValidation>
           </Col>
         </Row>

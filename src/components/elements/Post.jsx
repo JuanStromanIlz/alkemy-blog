@@ -20,7 +20,7 @@ function PostElement({info, onEdit, onDelete}) {
           node={nodeRef}
           trigger={triggerRef}
         >
-          <Actions.Option onClick={() => closeAction(onEdit, info.id)} icon='edit'>Edit Post</Actions.Option>              
+          <Actions.Option onClick={() => closeAction(onEdit, info.id)} icon='info'>Details</Actions.Option>              
           <Actions.Option onClick={() => closeAction(onDelete, info.id)} icon='delete_outline'>Delete</Actions.Option>
           </Actions>
       </Post.Header>

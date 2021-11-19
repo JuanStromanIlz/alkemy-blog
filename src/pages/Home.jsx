@@ -6,12 +6,16 @@ import useFetch from 'hooks/useFetch';
 import PostElement from 'components/elements/Post';
 import Layout from 'components/ui/Layout';
 import { Col, Row } from 'react-bootstrap';
-import Button from 'components/ui/Button';
 import Loading from 'components/elements/Loading';
 
 function Home() {
   const { openAlert } = useContext(AlertContext);
-  const { data, error, loading, setData } = useFetch(PostAPI.All);
+  const { data, loading, setData } = useFetch(PostAPI.All);
+  // const [paginate, setPaginate] = useState({
+  //   start: 0,
+  //   limit: 10,
+  //   recordLength: 0
+  // });
   let navigate = useNavigate();
 
   const filterItem = (id) => data.filter(post => post.id !== id);

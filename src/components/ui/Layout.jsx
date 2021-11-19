@@ -17,18 +17,14 @@ function Layout({children}) {
           }}>Blog</Link>
         </Navbar.Brand>
         <Nav className='me-auto'>
-          <Nav.Link>
-            <Link to='/' style={{
-              color: 'inherit',
-              textDecoration: 'none'
-            }}>Home</Link>
-          </Nav.Link>
-          <Nav.Link>
-            <Link to='/post/new' style={{
-              color: 'inherit',
-              textDecoration: 'none'
-            }}>New</Link>
-          </Nav.Link>
+          <Link to='/' style={{
+            color: 'inherit',
+            textDecoration: 'none'
+          }}>Home</Link>
+          <Link to='/post/new' style={{
+            color: 'inherit',
+            textDecoration: 'none'
+          }}>New</Link>
         </Nav>
         </Container>
       </Navbar>

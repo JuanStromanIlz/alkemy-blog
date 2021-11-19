@@ -1,16 +1,17 @@
 import Layout from 'components/ui/Layout';
 import { useParams } from 'react-router-dom';
-import { useContext, useState } from 'react';
+import { useContext, useState, useRef } from 'react';
 import AlertContext from 'context/AlertContext';
 import PostAPI from 'services/PostsAPI';
 import useFetch from 'hooks/useFetch';
 import Post from 'components/ui/Post';
 import { Col, Row } from 'react-bootstrap';
 import Loading from 'components/elements/Loading';
+import Button from 'react-bootstrap/Button';
 import FormWValidation from 'components/elements/FormWValidation';
 import { Field } from 'formik';
-import Form from 'components/ui/Form';
 import * as Yup from 'yup';
+import TextareaAutosize from 'react-textarea-autosize';
 
 const EditPostSchema = Yup.object().shape({
   title: Yup.string()
@@ -22,7 +23,14 @@ const EditPostSchema = Yup.object().shape({
 function DetailPost() {
   let { id } = useParams();
   const { openAlert } = useContext(AlertContext);
-  const { data, error, loading, setLoading } = useFetch(PostAPI.GetPost, id);
+  const { data, loading, setLoading } = useFetch(PostAPI.GetPost, id);
+  const [editPost, setEditPost] = useState(true);
+  const formRef = useRef(null);
+
+  function discardChanges() {
+    setEditPost(!editPost);
+    formRef.current?.resetForm();
+  }
 
   async function sendEditPost(values) {
     try {
@@ -54,7 +62,9 @@ function DetailPost() {
             <h2>Detail</h2>
             <Post>
               <Post.Body>
+                <Button onClick={discardChanges}>{editPost ? 'Edit' : 'Discart changes'}</Button>
                 <FormWValidation
+                  innerRef={formRef}
                   initialValues={{
                     title: data.title,
                     body: data.body
@@ -62,19 +72,21 @@ function DetailPost() {
                   validationSchema={EditPostSchema}
                   onSubmit={sendEditPost}
                 >
-                  <Form.Control 
-                    value={data.title}
-                    as={Field} 
+                  <Field
+                    as={TextareaAutosize}
+                    className='form-control' 
                     name='title' 
-                    placeholder='Title of the post' 
+                    disabled={editPost}
+                    placeholder='Title of the post.'
+                    maxRows={8}
                   />
                   <Field 
-                    value={data.body}
-                    as='textarea' 
+                    as={TextareaAutosize} 
                     className='form-control' 
-                    name='body' 
-                    rows='5' 
-                    placeholder='Write something for the body'
+                    name='body'  
+                    disabled={editPost}
+                    placeholder='Write something for the body.'
+                    maxRows={8}
                   />
                 </FormWValidation>
               </Post.Body>

@@ -2,12 +2,11 @@ import { Formik, Form as FormFormik } from 'formik';
 import Button from 'components/ui/Button';
 import Form from 'components/ui/Form';
 
-function FormWValidation({initialValues, validationSchema, onSubmit, children}) {
+function FormWValidation({onSubmit, children, ...props}) {
   return (
     <div>
       <Formik
-        initialValues={initialValues}
-        validationSchema={validationSchema}
+        {...props}
         onSubmit={(values, {resetForm}) => {
           onSubmit(values);
           resetForm();
@@ -16,9 +15,7 @@ function FormWValidation({initialValues, validationSchema, onSubmit, children}) 
         {({ errors, touched }) => (
           <Form as={FormFormik}>
             {children.map(field => 
-              <Form.Group 
-                // inError={Boolean(errors[field.props.name])}
-                // isValid={!errors[field.props.name] && touched[field.props.name]} 
+              <Form.Group
                 key={field.props.name} 
                 controlId={field.props.name}
               >
