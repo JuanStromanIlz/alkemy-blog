@@ -2,7 +2,7 @@ import axios from 'axios';
 
 async function AuthAPI(body) {
   try {
-    let res = await axios.post('http://challenge-react.alkemy.org/', {
+    let res = await axios.post(process.env.REACT_APP_AUTH_API, {
       email: body.email,
       password: body.password
     });

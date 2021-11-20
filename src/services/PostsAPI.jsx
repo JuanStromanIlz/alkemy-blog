@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const instance = axios.create({
-  baseURL: 'https://jsonplaceholder.typicode.com/posts'
+  baseURL: process.env.REACT_APP_POST_API
 });
 
 async function postCall(url = '/', body = undefined, method = 'get') {

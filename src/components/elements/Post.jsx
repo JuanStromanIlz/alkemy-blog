@@ -22,13 +22,13 @@ function PostElement({info, onEdit, onDelete}) {
         >
           <Actions.Option onClick={() => closeAction(onEdit, info.id)} icon='info'>Details</Actions.Option>              
           <Actions.Option onClick={() => closeAction(onDelete, info.id)} icon='delete_outline'>Delete</Actions.Option>
-          </Actions>
+        </Actions>
       </Card.Header>
       <Card.Body>
         <Card.Title>{info.title}</Card.Title>
-        <Card.Content>
+        {/* <Card.Content>
           <Card.Text>{info.body}</Card.Text>
-        </Card.Content>
+        </Card.Content> */}
       </Card.Body>
     </Card>
   );

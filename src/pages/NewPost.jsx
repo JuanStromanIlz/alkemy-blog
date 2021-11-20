@@ -9,6 +9,7 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import TextareaAutosize from 'react-textarea-autosize';
 import Card from 'components/ui/Card';
+import Alert from 'components/ui/Alert';
 
 const NewPostSchema = Yup.object().shape({
   title: Yup.string()
@@ -56,9 +57,9 @@ function NewPost() {
         <Col xs={12} md={5} className='offset-md-3'>
           <Card>
             <Card.Body>
-              <Card.Header>
-                <h2>New post</h2>
-              </Card.Header>
+              <Alert.Header>
+                <Alert.Title>New post</Alert.Title>
+              </Alert.Header>
                 <FormWValidation
                   initialValues={NewPostValues}
                   validationSchema={NewPostSchema}

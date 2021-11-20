@@ -81,6 +81,7 @@ const ActionsContainer = styled.div`
   }
 `;
 const List = styled(Card)`
+  z-index: 1;
   overflow: hidden;
   position: absolute;
   top: 48px;

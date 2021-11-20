@@ -13,10 +13,6 @@ const Form = styled(FormBS)`
   & .form-label {
     text-transform: capitalize;
     font-weight: 500;
-    margin-left: 12px;
-  }
-  & button[type='submit'] {
-    margin-top: 16px;
   }
   & .form-control {
     border-radius: 20px;
@@ -30,6 +26,7 @@ const Form = styled(FormBS)`
   & .form-control:disabled {
     background: transparent;
     border: none;
+    padding-left: 0;
   }
   & textarea {
     resize: none;

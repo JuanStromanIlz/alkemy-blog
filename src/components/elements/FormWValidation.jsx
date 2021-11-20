@@ -24,7 +24,7 @@ function FormWValidation({onSubmit, children, ...props}) {
                 <Form.ErrorMessage error={errors[field.props.name]} touched={touched[field.props.name]} />
               </Form.Group>
             )}
-            <Button type='submit'>
+            <Button fullWidth type='submit'>
               <span>Submit</span>
             </Button>
           </Form>

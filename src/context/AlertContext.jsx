@@ -1,5 +1,7 @@
 import { createContext, useReducer } from 'react';
-import Alert from 'react-bootstrap/Alert';
+// import Alert from 'react-bootstrap/Alert';
+import Alert from 'components/ui/Alert';
+import Button from 'components/ui/Button';
 
 const AlertContext = createContext();
 
@@ -44,15 +46,19 @@ const AlertProvider = ({children}) => {
       {children}
       {alert.open &&
         <Alert 
-          onClose={() => alertDispatch({type: 'close'})} 
           variant={alert.variant}
           dismissible
-          style={{position: 'fixed', left: '16px', bottom: '16px'}}
+          style={{position: 'fixed', left: '16px', bottom: '0'}}
         >
-          <Alert.Heading>
-            <strong className='me-auto'>{alert.title}</strong>
-          </Alert.Heading>
-          <p>{alert.message}</p>
+          <Alert.Body>
+            <Alert.Header>
+              <Alert.Title variant={alert.variant}>{alert.title}</Alert.Title>
+              <div>
+                <Button.Icon onClick={() => alertDispatch({type: 'close'})}>close</Button.Icon>
+              </div>
+            </Alert.Header>
+            <Alert.Text>{alert.message}</Alert.Text>
+          </Alert.Body>
         </Alert>
       }
     </AlertContext.Provider>

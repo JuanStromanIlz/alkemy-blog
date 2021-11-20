@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+import { Container, Row, Col } from 'react-bootstrap';
 import { NavLink } from 'react-router-dom';
 
 const Navbar = styled.nav`
@@ -23,6 +24,36 @@ const Navbar = styled.nav`
     pointer-events: 0;
     z-index: 0;
   }
+`;
+
+const StyledContainer = styled(Container)`
+  padding: 0;
+  height: 100%;
+  .desktop-sidebar {
+    display: none;
+  }
+  .menuToggle {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-end;
+  }
+  @media(min-width: 992px) {
+    .menuToggle {
+      display: none;
+    }
+    .desktop-sidebar {
+      display: flex;
+    }
+  }
+`;
+
+const StyledRow = styled(Row)`
+  height: 100%;
+`;
+
+const StyledCol = styled(Col)`
+  display: flex;
+  height: 100%;
 `;
 
 const Brand = styled.img`
@@ -86,5 +117,8 @@ const Link = ({children, ...props}) => (
 Navbar.List = List;
 Navbar.Brand = Brand;
 Navbar.Link = Link;
+Navbar.Col = StyledCol;
+Navbar.Row = StyledRow;
+Navbar.Container = StyledContainer;
 
 export default Navbar;

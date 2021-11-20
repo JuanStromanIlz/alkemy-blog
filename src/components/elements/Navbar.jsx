@@ -1,15 +1,34 @@
-import { Container, Row, Col } from 'react-bootstrap';
+import Button from 'components/ui/Button';
 import Navbar from 'components/ui/Navbar';
+import MobileMenu from 'components/ui/MobileMenu';
+import { useState } from 'react';
 
 function NavbarElement() {
+  const [menu, setMenu] = useState(false);
+
   return (
     <Navbar>
-      <Container fluid style={{padding: 0, height: '100%'}}>
-        <Row style={{height: '100%'}}>
-          <Col md={1} style={{display: 'flex', height: '100%'}}>
-            <Navbar.Brand src='https://campus.alkemy.org/static/media/logo.a56b5107.svg' />
-          </Col>
-          <Col className='offset-md-2' style={{display: 'flex', height: '100%'}}>
+      <MobileMenu show={menu} setShow={setMenu}>
+        <MobileMenu.List>
+          <MobileMenu.Item to='/'>
+            <span className='material-icons'>home</span>
+            Home
+          </MobileMenu.Item>
+          <MobileMenu.Item to='/post/new'>
+            <span className='material-icons'>add</span>
+            New
+          </MobileMenu.Item>
+        </MobileMenu.List>
+      </MobileMenu>
+      <Navbar.Container fluid>
+        <Navbar.Row>
+          <Navbar.Col xs={5} md={1}>
+            <Navbar.Brand src={process.env.PUBLIC_URL + '/images/header.svg'} />
+          </Navbar.Col>
+          <Navbar.Col className='menuToggle'>
+            <Button.Icon onClick={() => setMenu(!menu)}>menu_open</Button.Icon>
+          </Navbar.Col>
+          <Navbar.Col className='offset-md-2 desktop-sidebar'>
             <Navbar.List>
               <Navbar.Link to='/'>
                 <span className='material-icons'>home</span>
@@ -20,9 +39,9 @@ function NavbarElement() {
                 New
               </Navbar.Link>
             </Navbar.List>
-          </Col>
-        </Row>
-      </Container>
+          </Navbar.Col>
+        </Navbar.Row>
+      </Navbar.Container>
     </Navbar>
   );
 }

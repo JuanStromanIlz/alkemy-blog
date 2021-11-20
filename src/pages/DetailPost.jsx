@@ -1,10 +1,12 @@
 import Layout from 'components/ui/Layout';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import { useContext, useState, useRef } from 'react';
 import AlertContext from 'context/AlertContext';
 import PostAPI from 'services/PostsAPI';
 import useFetch from 'hooks/useFetch';
-import Card, { Actions } from 'components/ui/Card';
+import Card from 'components/ui/Card';
+import Alert from 'components/ui/Alert';
+import Form from 'components/ui/Form';
 import { Col, Row } from 'react-bootstrap';
 import FormWValidation from 'components/elements/FormWValidation';
 import { Field } from 'formik';
@@ -21,6 +23,7 @@ const EditPostSchema = Yup.object().shape({
 
 function DetailPost() {
   let { id } = useParams();
+  let navigate = useNavigate();
   const { openAlert } = useContext(AlertContext);
   const { data, loading, setLoading } = useFetch(PostAPI.GetPost, id);
   const [editPost, setEditPost] = useState(true);
@@ -40,8 +43,31 @@ function DetailPost() {
         type: 'open',
         variant: 'success',
         title: 'Success',
-        message: 'Post edited successfully created.'
+        message: 'Post edited successfully.'
       });
+    }
+    catch(err) {
+      openAlert({
+        type: 'open',
+        variant: 'danger',
+        title: 'Error',
+        message: err.message
+      });
+    }
+  }
+
+  async function deletePost(id) {
+    try {
+      setLoading(true);
+      await PostAPI.Delete(id);
+      setLoading(false);
+      openAlert({
+        type: 'open',
+        variant: 'success',
+        title: 'Success',
+        message: 'Post removed successfully.'
+      });
+      navigate('/');
     }
     catch(err) {
       openAlert({
@@ -59,12 +85,19 @@ function DetailPost() {
         <Col xs={12} md={5} className='offset-md-3'>
           <Card>
             <Card.Body>
-              <Card.Header>
-                <h2>Detail</h2>
-                <Button.Icon onClick={discardChanges}>
-                  <Actions.Option icon={editPost ? 'edit' : 'edit_off'}>{editPost ? 'Edit' : 'Discard Changes'}</Actions.Option>
-                </Button.Icon>
-              </Card.Header>
+              <Alert.Header>
+                <Alert.Title>Detail</Alert.Title>
+                <div style={{display: 'flex', flexDirection: 'row', gap: '8px'}}>
+                  <Button outline variant={editPost ? 'success' : 'warning'} onClick={discardChanges}>
+                    <span className='material-icons'>{editPost ? 'edit' : 'edit_off'}</span>
+                    <span>{editPost ? 'Edit' : 'Discard changes'}</span>
+                  </Button>
+                  <Button outline variant='danger' onClick={() => deletePost(data.id)}>
+                    <span className='material-icons'>delete_outline</span>
+                    <span>Delete</span>
+                  </Button>
+                </div>
+              </Alert.Header>
               <FormWValidation
                 innerRef={formRef}
                 initialValues={{

@@ -4,6 +4,7 @@ import AlertContext from 'context/AlertContext';
 import Layout from 'components/ui/Layout';
 import { useNavigate } from 'react-router-dom';
 import { Field } from 'formik';
+import Card from 'components/ui/Card';
 import Form from 'components/ui/Form';
 import FormWValidation from 'components/elements/FormWValidation';
 import * as Yup from 'yup';
@@ -52,15 +53,21 @@ function Login() {
     <Layout>
        <Row>
           <Col xs={12} md={5} className='offset-md-3'>
-            <h2>Log in</h2>
-            <FormWValidation
-              initialValues={LoginValues}
-              validationSchema={LoginSchema}
-              onSubmit={makeLoginCall}
-            >
-              <Form.Control as={Field} name='email' type='email' />
-              <Form.Control as={Field} name='password' type='password' />
-            </FormWValidation>
+            <Card>
+              <Card.Body>
+                <Card.Header>
+                  <h2>Log in</h2>
+                </Card.Header>
+                <FormWValidation
+                  initialValues={LoginValues}
+                  validationSchema={LoginSchema}
+                  onSubmit={makeLoginCall}
+                >
+                  <Form.Control as={Field} name='email' type='email' />
+                  <Form.Control as={Field} name='password' type='password' />
+                </FormWValidation>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
     </Layout>
