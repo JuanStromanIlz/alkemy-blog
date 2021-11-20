@@ -10,7 +10,7 @@ function PostElement({info, onEdit, onDelete}) {
   }
 
   return (
-    <Post bg='light'>
+    <Post>
       <Post.Header>
         <Post.User>
           <span>{info.userId}</span>

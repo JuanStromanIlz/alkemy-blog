@@ -1,4 +1,5 @@
 import Card from 'react-bootstrap/Card';
+import Button from 'components/ui/Button';
 import styled from 'styled-components';
 
 const Post = styled(Card)`
@@ -42,9 +43,6 @@ const Option = styled.div`
   padding: 16px;
   display: flex;
   flex-direction: row;
-  ${'' /* background: ${p => p.theme.textPrimary};
-  border-bottom: 1px solid rgba(0,0,0,.125);
-  color: ${p => p.theme.background}; */}
   transition: all .2s;
   .material-icons {
     display: flex;
@@ -70,14 +68,10 @@ const OptionComponent = ({icon, children, ...props}) => (
 const ActionsContainer = styled.div`
   position: relative;
   display: flex;
-  .actions--button {
+  .actions--trigger {
     display: flex;
-    margin: auto;
-    cursor: pointer;
-    border-radius: 50%;
-    border: 2px solid transparent;
   }
-  .list {
+  .actions--list {
     border: 1px solid rgba(0,0,0,.125);
     border-radius: .25rem;
     overflow: hidden;
@@ -87,11 +81,6 @@ const ActionsContainer = styled.div`
     display: flex;
     flex-direction: column;
   }
-  @media (hover: hover) {
-    .actions--button:hover {
-      border-color: ${p => p.theme.textSecondary};
-    }
-  }
 `;
 
 const Actions = ({show, node, trigger, children, ...props}) => {
@@ -100,11 +89,11 @@ const Actions = ({show, node, trigger, children, ...props}) => {
     <ActionsContainer
       {...props}
     >
-      <div className='actions--button' ref={trigger}>
-        <span className='material-icons'>more_horiz</span>
+      <div className='actions--trigger' ref={trigger}>
+        <Button.Icon>more_horiz</Button.Icon>
       </div>
       {show &&
-        <Post bg='white' ref={node} className='list'>
+        <Post bg='white' ref={node} className='actions--list'>
           {children}
         </Post>
       }
