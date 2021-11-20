@@ -1,12 +1,15 @@
-import Card from 'react-bootstrap/Card';
+import { Card as CardBS } from 'react-bootstrap';
 import Button from 'components/ui/Button';
 import styled from 'styled-components';
 
-const Post = styled(Card)`
+const Card = styled(CardBS)`
+  background: ${p => p.theme.surface};
   margin-bottom: 16px;
+  border-radius: max(0px, min(8px, calc((100vw - 4px - 100%) * 9999))) / 8px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 `;
 
-const Body = styled(Card.Body)` 
+const Body = styled(CardBS.Body)` 
   padding: 8px 16px;
 `;
 
@@ -16,14 +19,14 @@ const User = styled.div`
   width: 40px;
   height: 40px;
   border-radius: 50%;
-  background: ${p => p.theme.textSecondary};
+  background: ${p => p.theme.background};
   > * {
     line-height: 40px;
     font-weight: 700;
   }
 `;
 
-const Header = styled(Card.Header)`
+const Header = styled(CardBS.Header)`
   background-color: transparent;
   border: none;
   padding-top: 12px;
@@ -39,6 +42,8 @@ const Content = styled.div`
 `;
 
 const Option = styled.div`
+  background: ${p => p.theme.surface};
+  border-bottom: 1px solid ${p => p.theme.background};
   cursor: pointer;
   padding: 16px;
   display: flex;
@@ -46,14 +51,17 @@ const Option = styled.div`
   transition: all .2s;
   .material-icons {
     display: flex;
-    margin-right: 12px;
+    margin-right: 8px;
   }
   p {
     white-space: nowrap;
   }
+  &:last-of-type {
+    border-bottom: none;
+  }
   @media (hover: hover) {
     :hover {
-      background: ${p => p.theme.textSecondary};
+      filter: brightness(.85);
     }
   }
 `;
@@ -61,7 +69,7 @@ const Option = styled.div`
 const OptionComponent = ({icon, children, ...props}) => (
   <Option {...props}>
     <span className='material-icons'>{icon}</span>
-    <Post.Text>{children}</Post.Text>
+    <Card.Text>{children}</Card.Text>
   </Option>
 );
 
@@ -71,16 +79,14 @@ const ActionsContainer = styled.div`
   .actions--trigger {
     display: flex;
   }
-  .actions--list {
-    border: 1px solid rgba(0,0,0,.125);
-    border-radius: .25rem;
-    overflow: hidden;
-    position: absolute;
-    top: 48px;
-    right: 0;
-    display: flex;
-    flex-direction: column;
-  }
+`;
+const List = styled(Card)`
+  overflow: hidden;
+  position: absolute;
+  top: 48px;
+  right: 0;
+  display: flex;
+  flex-direction: column;
 `;
 
 const Actions = ({show, node, trigger, children, ...props}) => {
@@ -93,9 +99,9 @@ const Actions = ({show, node, trigger, children, ...props}) => {
         <Button.Icon>more_horiz</Button.Icon>
       </div>
       {show &&
-        <Post bg='white' ref={node} className='actions--list'>
+        <List bg='white' ref={node}>
           {children}
-        </Post>
+        </List>
       }
     </ActionsContainer>
   );
@@ -105,9 +111,9 @@ Actions.Option = OptionComponent;
 
 export { Actions };
 
-Post.User = User;
-Post.Header = Header;
-Post.Body = Body;
-Post.Content = Content;
+Card.User = User;
+Card.Header = Header;
+Card.Body = Body;
+Card.Content = Content;
 
-export default Post;
+export default Card;

@@ -3,12 +3,12 @@ import { useContext, useState } from 'react';
 import AlertContext from 'context/AlertContext';
 import PostAPI from 'services/PostsAPI';
 import { Col, Row } from 'react-bootstrap';
-import Loading from 'components/elements/Loading';
 import FormWValidation from 'components/elements/FormWValidation';
 import { Field } from 'formik';
 import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import TextareaAutosize from 'react-textarea-autosize';
+import Card from 'components/ui/Card';
 
 const NewPostSchema = Yup.object().shape({
   title: Yup.string()
@@ -51,40 +51,38 @@ function NewPost() {
   }
 
   return (
-    <Layout>
-      {!loading ?
-        <Row>
-          <Col xs={12} md={5} className='offset-md-3'>
-            <h2>New post</h2>
-            <FormWValidation
-              initialValues={NewPostValues}
-              validationSchema={NewPostSchema}
-              onSubmit={createNewPost}
-            >
-              <Field 
-                as={TextareaAutosize}
-                className='form-control'
-                name='title'
-                placeholder='Title of the post.'
-                maxRows={8} 
-              />
-              <Field 
-                as={TextareaAutosize}
-                className='form-control'
-                name='body'
-                placeholder='Write something for the body.'
-                maxRows={8}  
-              />
-            </FormWValidation>
-          </Col>
-        </Row>
-      :
-        <Row>
-          <Col xs={12} md={5} className='offset-md-3'>
-            <Loading />
-          </Col>
-        </Row>
-      }
+    <Layout loading={loading}>
+      <Row>
+        <Col xs={12} md={5} className='offset-md-3'>
+          <Card>
+            <Card.Body>
+              <Card.Header>
+                <h2>New post</h2>
+              </Card.Header>
+                <FormWValidation
+                  initialValues={NewPostValues}
+                  validationSchema={NewPostSchema}
+                  onSubmit={createNewPost}
+                >
+                  <Field 
+                    as={TextareaAutosize}
+                    className='form-control'
+                    name='title'
+                    placeholder='Title of the post.'
+                    maxRows={8} 
+                  />
+                  <Field 
+                    as={TextareaAutosize}
+                    className='form-control'
+                    name='body'
+                    placeholder='Write something for the body.'
+                    maxRows={8}  
+                  />
+                </FormWValidation>
+            </Card.Body>
+          </Card>
+        </Col>
+      </Row>
     </Layout>
   );
 }

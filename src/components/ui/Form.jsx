@@ -13,9 +13,19 @@ const Form = styled(FormBS)`
   & .form-label {
     text-transform: capitalize;
     font-weight: 500;
+    margin-left: 12px;
   }
   & button[type='submit'] {
     margin-top: 16px;
+  }
+  & .form-control {
+    border-radius: 20px;
+    background: ${p => p.theme.background};
+  }
+  & .form-control:focus {
+    background: ${p => p.theme.surface};
+    border-color: ${p => p.theme.alkemy};
+    box-shadow: 0 0 0 0.25rem ${p => p.theme.alkemyTransparency};
   }
   & .form-control:disabled {
     background: transparent;

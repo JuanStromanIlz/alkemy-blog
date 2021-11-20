@@ -1,4 +1,4 @@
-import Post, {Actions} from 'components/ui/Post';
+import Card, {Actions} from 'components/ui/Card';
 import useDetectClickOut from 'hooks/useDetectClickOut';
 
 function PostElement({info, onEdit, onDelete}) {
@@ -10,11 +10,11 @@ function PostElement({info, onEdit, onDelete}) {
   }
 
   return (
-    <Post>
-      <Post.Header>
-        <Post.User>
+    <Card>
+      <Card.Header>
+        <Card.User>
           <span>{info.userId}</span>
-        </Post.User>
+        </Card.User>
         <Actions
           show={show}
           node={nodeRef}
@@ -23,14 +23,14 @@ function PostElement({info, onEdit, onDelete}) {
           <Actions.Option onClick={() => closeAction(onEdit, info.id)} icon='info'>Details</Actions.Option>              
           <Actions.Option onClick={() => closeAction(onDelete, info.id)} icon='delete_outline'>Delete</Actions.Option>
           </Actions>
-      </Post.Header>
-      <Post.Body>
-        <Post.Title>{info.title}</Post.Title>
-        <Post.Content>
-          <Post.Text>{info.body}</Post.Text>
-        </Post.Content>
-      </Post.Body>
-    </Post>
+      </Card.Header>
+      <Card.Body>
+        <Card.Title>{info.title}</Card.Title>
+        <Card.Content>
+          <Card.Text>{info.body}</Card.Text>
+        </Card.Content>
+      </Card.Body>
+    </Card>
   );
 }
 

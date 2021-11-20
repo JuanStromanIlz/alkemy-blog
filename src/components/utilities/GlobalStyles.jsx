@@ -12,8 +12,7 @@ const GlobalStyles = createGlobalStyle`
     margin: 0;
     padding: 0;
     font-family: 'DM Sans', sans-serif !important;
-    ${'' /* background: ${props => props.theme.background};
-    color: ${props => props.theme.textPrimary}; */}
+    background: ${p => p.theme.background};
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

@@ -44,27 +44,19 @@ function Home() {
   }
 
   return (
-    <Layout>
-      {!loading ?
-        <Row>
-          <Col xs={12} md={5} className='offset-md-3'>
-            {data.map(post => 
-              <PostElement
-                key={post.id}
-                info={post}
-                onEdit={editPost}
-                onDelete={deletePost}
-              />
-            )}
-          </Col>
-        </Row>
-      : 
-        <Row>
-          <Col xs={12} md={5} className='offset-md-3'>
-            <Loading />
-          </Col>
-        </Row>
-      }
+    <Layout loading={loading}>
+      <Row>
+        <Col xs={12} md={5} className='offset-md-3'>
+          {data?.map(post => 
+            <PostElement
+              key={post.id}
+              info={post}
+              onEdit={editPost}
+              onDelete={deletePost}
+            />
+          )}
+        </Col>
+      </Row>
     </Layout>
   );
 }

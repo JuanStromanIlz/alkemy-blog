@@ -1,35 +1,26 @@
-import { Container } from 'react-bootstrap';
-import Navbar from 'components/ui/Navbar';
-import Nav from 'react-bootstrap/Nav';
-import { Link } from 'react-router-dom';
+import { Container, Row, Col } from 'react-bootstrap';
+import NavbarElement from 'components/elements/Navbar';
+import styled from 'styled-components';
+import Loading from 'components/elements/Loading';
 
-function Layout({children}) {
+const Wrapper = styled(Container)`
+  margin-top: 16px;
+`;
+
+function Layout({children, loading = false}) {
   return (
-    <Container fluid>
-      <Navbar>
-        <Container fluid style={{
-          padding: 0
-        }}>
-        <Navbar.Brand>
-          <Link to='/' style={{
-            color: 'inherit',
-            textDecoration: 'none'
-          }}>Blog</Link>
-        </Navbar.Brand>
-        <Nav className='me-auto'>
-          <Link to='/' style={{
-            color: 'inherit',
-            textDecoration: 'none'
-          }}>Home</Link>
-          <Link to='/post/new' style={{
-            color: 'inherit',
-            textDecoration: 'none'
-          }}>New</Link>
-        </Nav>
-        </Container>
-      </Navbar>
-      {children}
-    </Container>
+    <>
+      <NavbarElement />
+      <Wrapper fluid>
+        {loading ?
+          <Loading />
+        :
+          <main>
+            {children}
+          </main>
+        }
+      </Wrapper>
+    </>
   );
 } 
 

@@ -4,14 +4,13 @@ import { useContext, useState, useRef } from 'react';
 import AlertContext from 'context/AlertContext';
 import PostAPI from 'services/PostsAPI';
 import useFetch from 'hooks/useFetch';
-import Post from 'components/ui/Post';
+import Card, { Actions } from 'components/ui/Card';
 import { Col, Row } from 'react-bootstrap';
-import Loading from 'components/elements/Loading';
-import Button from 'react-bootstrap/Button';
 import FormWValidation from 'components/elements/FormWValidation';
 import { Field } from 'formik';
 import * as Yup from 'yup';
 import TextareaAutosize from 'react-textarea-autosize';
+import Button from 'components/ui/Button';
 
 const EditPostSchema = Yup.object().shape({
   title: Yup.string()
@@ -55,51 +54,47 @@ function DetailPost() {
   }
 
   return (
-    <Layout>
-      {!loading ?
-        <Row>
-          <Col xs={12} md={5} className='offset-md-3'>
-            <h2>Detail</h2>
-            <Post>
-              <Post.Body>
-                <Button onClick={discardChanges}>{editPost ? 'Edit' : 'Discart changes'}</Button>
-                <FormWValidation
-                  innerRef={formRef}
-                  initialValues={{
-                    title: data.title,
-                    body: data.body
-                  }}
-                  validationSchema={EditPostSchema}
-                  onSubmit={sendEditPost}
-                >
-                  <Field
-                    as={TextareaAutosize}
-                    className='form-control' 
-                    name='title' 
-                    disabled={editPost}
-                    placeholder='Title of the post.'
-                    maxRows={8}
-                  />
-                  <Field 
-                    as={TextareaAutosize} 
-                    className='form-control' 
-                    name='body'  
-                    disabled={editPost}
-                    placeholder='Write something for the body.'
-                    maxRows={8}
-                  />
-                </FormWValidation>
-              </Post.Body>
-            </Post>
-          </Col>
-        </Row>
-      :
+    <Layout loading={loading}>
       <Row>
         <Col xs={12} md={5} className='offset-md-3'>
-          <Loading />
+          <Card>
+            <Card.Body>
+              <Card.Header>
+                <h2>Detail</h2>
+                <Button.Icon onClick={discardChanges}>
+                  <Actions.Option icon={editPost ? 'edit' : 'edit_off'}>{editPost ? 'Edit' : 'Discard Changes'}</Actions.Option>
+                </Button.Icon>
+              </Card.Header>
+              <FormWValidation
+                innerRef={formRef}
+                initialValues={{
+                  title: data?.title,
+                  body: data?.body
+                }}
+                validationSchema={EditPostSchema}
+                onSubmit={sendEditPost}
+              >
+                <Field
+                  as={TextareaAutosize}
+                  className='form-control' 
+                  name='title' 
+                  disabled={editPost}
+                  placeholder='Title of the post.'
+                  maxRows={8}
+                />
+                <Field 
+                  as={TextareaAutosize} 
+                  className='form-control' 
+                  name='body'  
+                  disabled={editPost}
+                  placeholder='Write something for the body.'
+                  maxRows={8}
+                />
+              </FormWValidation>
+            </Card.Body>
+          </Card>
         </Col>
       </Row>
-      }
     </Layout>
   );
 }

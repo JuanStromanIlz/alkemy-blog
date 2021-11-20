@@ -1,7 +1,10 @@
 const Theme = {
-  background: '#191816',
+  background: '#F0F2F5',
+  surface: '#fff',
   textPrimary: '#fff',
   textSecondary: 'darkgray',
+  alkemy: '#58c1f5',
+  alkemyTransparency: '#58c1f522',
   states: {
     info: '#FBCBCB',
     success: '#34A847',
