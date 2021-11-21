@@ -1,4 +1,4 @@
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import AlertContext from 'context/AlertContext';
 import Layout from 'components/ui/Layout';
@@ -25,11 +25,14 @@ const LoginValues = {
 
 function Login() {
   const { openAlert } = useContext(AlertContext);
+  const [loading, setLoading] = useState(false);
   let navigate = useNavigate();
 
   async function makeLoginCall(values) {
     try {
+      setLoading(true);
       let res = await AuthAPI(values);
+      setLoading(false);
       openAlert({
         type: 'open',
         variant: 'success',
@@ -50,7 +53,7 @@ function Login() {
   }
 
   return (
-    <Layout>
+    <Layout loading={loading}>
        <Row>
           <Col xs={12} md={5} className='offset-md-3'>
             <Card>
