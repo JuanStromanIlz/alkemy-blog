@@ -5,8 +5,6 @@ import AlertContext from 'context/AlertContext';
 import PostAPI from 'services/PostsAPI';
 import useFetch from 'hooks/useFetch';
 import Card from 'components/ui/Card';
-import Alert from 'components/ui/Alert';
-import Form from 'components/ui/Form';
 import { Col, Row } from 'react-bootstrap';
 import FormWValidation from 'components/elements/FormWValidation';
 import { Field } from 'formik';
@@ -83,49 +81,61 @@ function DetailPost() {
     <Layout loading={loading}>
       <Row>
         <Col xs={12} md={5} className='offset-md-3'>
+        <Card>
+          <Card.Header>
+            <Card.Title>Detail</Card.Title>
+            <div style={{display: 'flex', flexDirection: 'row', gap: '8px'}}>
+              <Button.Icon variant={editPost ? 'success' : 'warning'} onClick={discardChanges}>
+                <span className='material-icons'>{editPost ? 'edit' : 'edit_off'}</span>
+              </Button.Icon>
+              <Button.Icon variant='danger' onClick={() => deletePost(data.id)}>
+                <span className='material-icons'>delete_outline</span>
+              </Button.Icon>
+            </div>
+          </Card.Header>
+        </Card>
+        {editPost ?
           <Card>
+            <Card.Header>
+              <Card.User>
+                <span>{data?.userId}</span>
+              </Card.User>
+            </Card.Header>
             <Card.Body>
-              <Alert.Header>
-                <Alert.Title>Detail</Alert.Title>
-                <div style={{display: 'flex', flexDirection: 'row', gap: '8px'}}>
-                  <Button outline variant={editPost ? 'success' : 'warning'} onClick={discardChanges}>
-                    <span className='material-icons'>{editPost ? 'edit' : 'edit_off'}</span>
-                    <span>{editPost ? 'Edit' : 'Discard changes'}</span>
-                  </Button>
-                  <Button outline variant='danger' onClick={() => deletePost(data.id)}>
-                    <span className='material-icons'>delete_outline</span>
-                    <span>Delete</span>
-                  </Button>
-                </div>
-              </Alert.Header>
-              <FormWValidation
-                innerRef={formRef}
-                initialValues={{
-                  title: data?.title,
-                  body: data?.body
-                }}
-                validationSchema={EditPostSchema}
-                onSubmit={sendEditPost}
-              >
-                <Field
-                  as={TextareaAutosize}
-                  className='form-control' 
-                  name='title' 
-                  disabled={editPost}
-                  placeholder='Title of the post.'
-                  maxRows={8}
-                />
-                <Field 
-                  as={TextareaAutosize} 
-                  className='form-control' 
-                  name='body'  
-                  disabled={editPost}
-                  placeholder='Write something for the body.'
-                  maxRows={8}
-                />
-              </FormWValidation>
+              <Card.Title>{data?.title}</Card.Title>
+              <Card.Text>{data?.body}</Card.Text>
             </Card.Body>
           </Card>
+        :
+        <Card>
+          <Card.Body>
+            <FormWValidation
+              innerRef={formRef}
+              initialValues={{
+                title: data?.title,
+                body: data?.body
+              }}
+              validationSchema={EditPostSchema}
+              onSubmit={sendEditPost}
+            >
+              <Field
+                as={TextareaAutosize}
+                className='form-control' 
+                name='title' 
+                placeholder='Title of the post.'
+                maxRows={8}
+              />
+              <Field 
+                as={TextareaAutosize} 
+                className='form-control' 
+                name='body'  
+                placeholder='Write something for the body.'
+                maxRows={8}
+              />
+            </FormWValidation>
+          </Card.Body>
+        </Card>
+        }
         </Col>
       </Row>
     </Layout>

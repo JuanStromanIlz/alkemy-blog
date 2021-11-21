@@ -2,6 +2,7 @@ import Button from 'components/ui/Button';
 import Navbar from 'components/ui/Navbar';
 import MobileMenu from 'components/ui/MobileMenu';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 
 function NavbarElement() {
   const [menu, setMenu] = useState(false);
@@ -23,7 +24,9 @@ function NavbarElement() {
       <Navbar.Container fluid>
         <Navbar.Row>
           <Navbar.Col xs={5} md={1}>
-            <Navbar.Brand src={process.env.PUBLIC_URL + '/images/header.svg'} />
+            <Link to='/' style={{display: 'flex'}}>
+              <Navbar.Brand src={process.env.PUBLIC_URL + '/images/header.svg'} />
+            </Link>
           </Navbar.Col>
           <Navbar.Col className='menuToggle'>
             <Button.Icon onClick={() => setMenu(!menu)}>menu_open</Button.Icon>
@@ -45,5 +48,23 @@ function NavbarElement() {
     </Navbar>
   );
 }
+
+function SimpleNav() {
+  return (
+    <Navbar>
+      <Navbar.Container fluid>
+        <Navbar.Row>
+          <Navbar.Col xs={12}>
+            <Link to='/' style={{display: 'flex'}}>
+              <Navbar.Brand src={process.env.PUBLIC_URL + '/images/header.svg'} />
+            </Link>
+          </Navbar.Col>
+        </Navbar.Row>
+      </Navbar.Container>
+    </Navbar>
+  );
+}
+
+export { SimpleNav };
 
 export default NavbarElement;

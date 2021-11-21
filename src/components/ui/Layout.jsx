@@ -1,5 +1,6 @@
-import { Container, Row, Col } from 'react-bootstrap';
-import NavbarElement from 'components/elements/Navbar';
+import { useLocation } from 'react-router-dom'
+import { Container } from 'react-bootstrap';
+import NavbarElement, { SimpleNav } from 'components/elements/Navbar';
 import styled from 'styled-components';
 import Loading from 'components/elements/Loading';
 
@@ -8,9 +9,13 @@ const Wrapper = styled(Container)`
 `;
 
 function Layout({children, loading = false}) {
+  let location = useLocation().pathname;
+  let userIsInLogin = location === '/login';
   return (
     <>
-      <NavbarElement />
+      {userIsInLogin ?
+        <SimpleNav />
+      : <NavbarElement />}
       <Wrapper fluid>
         {loading ?
           <Loading />

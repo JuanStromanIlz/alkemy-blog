@@ -6,16 +6,10 @@ import useFetch from 'hooks/useFetch';
 import PostElement from 'components/elements/Post';
 import Layout from 'components/ui/Layout';
 import { Col, Row } from 'react-bootstrap';
-import Loading from 'components/elements/Loading';
 
 function Home() {
   const { openAlert } = useContext(AlertContext);
-  const { data, loading, setData } = useFetch(PostAPI.All);
-  // const [paginate, setPaginate] = useState({
-  //   start: 0,
-  //   limit: 10,
-  //   recordLength: 0
-  // });
+  const { data, loading, setData, setLoading } = useFetch(PostAPI.All);
   let navigate = useNavigate();
 
   const filterItem = (id) => data.filter(post => post.id !== id);
@@ -24,7 +18,9 @@ function Home() {
 
   const deletePost = async (id) => {
     try {
+      setLoading(true);
       await PostAPI.Delete(id);
+      setLoading(false);
       setData(filterItem(id));
       openAlert({
         type: 'open',

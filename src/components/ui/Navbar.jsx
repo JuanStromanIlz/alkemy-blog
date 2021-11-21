@@ -86,9 +86,9 @@ const LinkContainer = styled.li`
     font-weight: 600;
     display: flex;
     flex-direction: row;
+    gap: 8px;
     .material-icons {
       display: flex;
-      margin-right: 8px;
     }
   }
   .active {
@@ -108,8 +108,8 @@ const LinkContainer = styled.li`
   }
 `;
 
-const Link = ({children, ...props}) => (
-  <LinkContainer>
+const Link = ({children, className, ...props}) => (
+  <LinkContainer className={className}>
     <NavLink {...props}>{children}</NavLink>
   </LinkContainer>
 );

@@ -54,10 +54,12 @@ function Login() {
        <Row>
           <Col xs={12} md={5} className='offset-md-3'>
             <Card>
+              <Card.Header>
+                <Card.Title>Login</Card.Title>
+              </Card.Header>
+            </Card>
+            <Card>
               <Card.Body>
-                <Card.Header>
-                  <h2>Log in</h2>
-                </Card.Header>
                 <FormWValidation
                   initialValues={LoginValues}
                   validationSchema={LoginSchema}

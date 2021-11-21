@@ -9,7 +9,6 @@ import { useNavigate } from 'react-router-dom';
 import * as Yup from 'yup';
 import TextareaAutosize from 'react-textarea-autosize';
 import Card from 'components/ui/Card';
-import Alert from 'components/ui/Alert';
 
 const NewPostSchema = Yup.object().shape({
   title: Yup.string()
@@ -56,30 +55,32 @@ function NewPost() {
       <Row>
         <Col xs={12} md={5} className='offset-md-3'>
           <Card>
+            <Card.Header>
+              <Card.Title>New Post</Card.Title>
+            </Card.Header>
+          </Card>
+          <Card>
             <Card.Body>
-              <Alert.Header>
-                <Alert.Title>New post</Alert.Title>
-              </Alert.Header>
-                <FormWValidation
-                  initialValues={NewPostValues}
-                  validationSchema={NewPostSchema}
-                  onSubmit={createNewPost}
-                >
-                  <Field 
-                    as={TextareaAutosize}
-                    className='form-control'
-                    name='title'
-                    placeholder='Title of the post.'
-                    maxRows={8} 
-                  />
-                  <Field 
-                    as={TextareaAutosize}
-                    className='form-control'
-                    name='body'
-                    placeholder='Write something for the body.'
-                    maxRows={8}  
-                  />
-                </FormWValidation>
+              <FormWValidation
+                initialValues={NewPostValues}
+                validationSchema={NewPostSchema}
+                onSubmit={createNewPost}
+              >
+                <Field 
+                  as={TextareaAutosize}
+                  className='form-control'
+                  name='title'
+                  placeholder='Title of the post.'
+                  maxRows={8} 
+                />
+                <Field 
+                  as={TextareaAutosize}
+                  className='form-control'
+                  name='body'
+                  placeholder='Write something for the body.'
+                  maxRows={8}  
+                />
+              </FormWValidation>
             </Card.Body>
           </Card>
         </Col>

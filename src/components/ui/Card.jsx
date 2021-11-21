@@ -76,6 +76,7 @@ const OptionComponent = ({icon, children, ...props}) => (
 const ActionsContainer = styled.div`
   position: relative;
   display: flex;
+  margin-left: auto;
   .actions--trigger {
     display: flex;
   }

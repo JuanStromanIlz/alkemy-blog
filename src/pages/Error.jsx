@@ -1,5 +1,5 @@
 import Layout from 'components/ui/Layout';
-import Alert from 'react-bootstrap/Alert';
+import Alert from 'components/ui/Alert';
 import { Col, Row } from 'react-bootstrap';
 
 function Error() {
@@ -7,13 +7,13 @@ function Error() {
     <Layout>
       <Row>
         <Col xs={12} md={5} className='offset-md-3'>
-          <Alert 
-            variant='danger'
-          >
-            <Alert.Heading>
-              <strong className='me-auto'>Error</strong>
-            </Alert.Heading>
-            <p>Oops, nothing here...</p>
+          <Alert>
+            <Alert.Body>
+              <Alert.Header>
+                <Alert.Title variant='danger' className='me-auto'>Error</Alert.Title>
+              </Alert.Header>
+              <Alert.Text>Oops, nothing here...</Alert.Text>
+            </Alert.Body>
           </Alert>
         </Col>
       </Row>

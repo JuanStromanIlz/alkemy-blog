@@ -13,7 +13,7 @@ function PostElement({info, onEdit, onDelete}) {
     <Card>
       <Card.Header>
         <Card.User>
-          <span>{info.userId}</span>
+          <span>{info?.userId}</span>
         </Card.User>
         <Actions
           show={show}
@@ -26,9 +26,6 @@ function PostElement({info, onEdit, onDelete}) {
       </Card.Header>
       <Card.Body>
         <Card.Title>{info.title}</Card.Title>
-        {/* <Card.Content>
-          <Card.Text>{info.body}</Card.Text>
-        </Card.Content> */}
       </Card.Body>
     </Card>
   );
